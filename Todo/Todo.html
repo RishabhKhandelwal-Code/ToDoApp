@@ -1,0 +1,74 @@
+﻿<!DOCTYPE html>
+<html>
+
+<head>
+    <!--<link rel="stylesheet" href="styles.css">-->
+    <link href="Todo.css" rel="stylesheet" />
+</head>
+
+<body style="background: url(Todo.jpg) no-repeat center center fixed;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;">
+    <h1>ToDo list</h1>
+    <button class="todo" id="todo" onclick="window.location.href = 'http://localhost:58162/Profile/Profile.html';">Edit Profile</button>
+    <button class="logout" id="logout" onclick="LogOut()">LogOut</button>
+    <table>
+        <tr>
+            <td>
+                <form onsubmit="event.preventDefault();onFormSubmit();" autocomplete="off">
+                    <div>
+                        <label>Date</label><br />
+                        <input type="date" name="date" id="date" required>
+                    </div>
+                    <div>
+                        <br />
+                        <label>Title</label>
+                        <input type="text" name="title" id="title" required>
+                    </div>
+                    <div>
+                        <br />
+                        <label>What's the note?</label>
+                        <br />
+                        <!--<input type="text" name="salary" id="salary">-->
+                        <textarea rows="4" cols="50" name="comment" id="comment" placeholder="Description(optional)"></textarea>
+                    </div>
+                    <div>
+                        <br />
+                        <label>Category</label>
+                        <!--<input type="text" name="city" id="city">-->
+                        <select id="categories" required>
+                            <option value="" selected disabled hidden>Choose here</option>
+                            <option value="Personal">Personal</option>
+                            <option value="Office">Official</option>
+                            <option value="Both">Both</option>
+                        </select>
+                    </div>
+                    <div class="form-action-buttons">
+                        <input type="submit" value="Submit">
+                    </div>
+                </form>
+            </td>
+            <td>
+                <input type="text" id="myInput" onkeyup="SearchItems()" placeholder="Search for names.." title="Type in a name">
+                <table class="list" id="myTable" style="table-layout: fixed; width: 100%">
+                    <thead>
+                        <tr id="tableHeader">
+                            <th>Full Name</th>
+                            <th>Title</th>
+                            <th>Description</th>
+                            <th>Category</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody></tbody>
+                </table>
+            </td>
+        </tr>
+    </table>
+    <script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+    <script src="Todo.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+</body>
+</html>

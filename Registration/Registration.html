@@ -1,0 +1,45 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <link href="Registration.css" rel="stylesheet" />
+    <script src="Registration.js"></script>
+</head>
+<body>
+    <link href="https://fonts.googleapis.com/css?family=Roboto&display=swap" rel="stylesheet">
+    <div class="wrapper">
+        <form name='registration' class="myForm" onSubmit="event.preventDefault(); return formValidation();">
+            <div class="formInstructionsDiv formElement">
+                <h2 class="formTitle">Sign Up</h2>
+                <p class="instructionsText">Please fill in this form to create an account</p>
+            </div>
+            <div class="fillContentDiv formElement">
+                <div class="names formContentElement">
+                    <input class="inputRequest " id="firstName" type="text" placeholder="First Name" />
+                    <input class="inputRequest " id="lastName" type="text" placeholder="Last Name" />
+                </div>
+                <label>
+                    <input class="inputRequest formContentElement" id="email" type="email" placeholder="Email">
+                </label>
+                <label>
+                    <input class="inputRequest formContentElement" type="password" id="password" placeholder="Enter password">
+                </label>
+                <label>
+                    <input class="inputRequest formContentElement" type="password" id="cpassword" placeholder="Confirm password">
+                </label>
+                <label>
+                    <input class="inputRequest formContentElement" type="text" id="address" placeholder="Enter Address">
+                </label>
+                <label>
+                    <input class="inputRequest formContentElement" type="text" id="gender" placeholder="Enter Male/Female">
+                </label>
+            </div>
+            <div class="submitButtonDiv formElement">
+                <input class="submitButton" type="submit" name="submit" value="Submit" />
+                <input class="submitButton" id="login" type="button" value="SignIn"
+                       onclick="window.location.href = 'http://localhost:58162/Login/Login.html'" />
+            </div>
+        </form>
+    </div>
+</body>
+</html>
