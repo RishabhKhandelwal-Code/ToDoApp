@@ -10,14 +10,14 @@
     <div class="wrapper fadeInDown">
         <div id="formContent">
             <h2 class="active"> Sign In </h2>
-            <h2 class="inactive underlineHover" onclick="window.location.href = 'http://localhost:58162/Registration/Registration.html'">Sign Up </h2>
+            <h2 class="inactive underlineHover" onclick="window.location.href = '../Registration/Registration.html'">Sign Up </h2>
             <!-- Icon -->
             <div class="fadeIn first">
                 <img src="userIcon.png" id="icon" alt="User Icon" />
             </div>
             <!-- Login Form -->
             <form name="login" onSubmit="event.preventDefault();">
-                <input type="email" id="login" class="fadeIn second" name="userid" placeholder="Email">
+                <input type="email" id="login" class="fadeIn second" name="userId" placeholder="Email">
                 <input type="password" id="password" class="fadeIn third" name="pswrd" placeholder="Password">
                 <input type="submit" class="fadeIn fourth" value="Log In" onclick="check(this.form)">
             </form>

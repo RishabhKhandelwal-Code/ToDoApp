@@ -2,7 +2,7 @@
 It allows user to do all CRUD operations along with sorting and filtering of data*/
 
 //Checks if the user is authenticated
-(function IsuserAuthenticated() {
+(function isUserAuthenticated() {
     if (sessionStorage.getItem('AuthenticationState') === null) {
         window.open("AccessDenied.html", "_self");
     }
@@ -146,7 +146,7 @@ function onDelete(td) {
 }
 
 //To do log out
-function LogOut() {
+function logOut() {
     sessionStorage.clear();
-    window.open("http://localhost:58162/Login/Login.html");
+    window.open("../Login/Login.html");
 }

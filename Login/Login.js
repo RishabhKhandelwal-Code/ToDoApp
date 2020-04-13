@@ -4,44 +4,44 @@ like Todo list, Profile and SignOut*/
 
 //Check the user inputs
 function check(form) {
-    if (form.userid.value == "" || form.pswrd.value == "") {
+    if (form.userId.value == "" || form.pswrd.value == "") {
         alert("Please fill all the details before submitting");
         return false;
     }
 
     //assigning form inputs to the variables
-    formUserName = form.userid.value;
+    formUserName = form.userId.value;
     formUserPassword = form.pswrd.value;
 
     //Get data from local storage
-    var userList_deserialized = JSON.parse(localStorage.getItem("userData"));
+    var userListDeserialized = JSON.parse(localStorage.getItem("userData"));
 
     //validate localstorage for null or undefined
-    if (userList_deserialized == undefined || userList_deserialized == null) {
+    if (userListDeserialized == undefined || userListDeserialized == null) {
         if (window.confirm('You don\'t have a register account. Please click OK to SignUp')) {
-            window.open("http://localhost:58162/Registration/Registration.html");
+            window.open("../Registration/Registration.html");
         }
     }
 
     //assigning localStorage values to variables
-    var userName = userList_deserialized[0].email;
-    var password = userList_deserialized[0].password;
+    var userName = userListDeserialized[0].email;
+    var password = userListDeserialized[0].password;
 
     //Logic for authorizing the user
-    if (ValidateUserName(formUserName) && ValidateFormpassword(formUserPassword)) {
+    if (validateUserName(formUserName) && validateFormPassword(formUserPassword)) {
         //Storing user information on successful login
         sessionStorage.setItem("AuthenticationState", "Authenticated");
         alert("Logged In successfully");
-        window.open("http://localhost:58162/Todo/Todo.html");
+        window.open("../Todo/Todo.html");
     }
     else {
         alert("Invalid UserName or Password");
     }
 
     //validate userName
-    function ValidateUserName(formUserName) {
-        var mailformat = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
-        if (formUserName.match(mailformat) && formUserName.toUpperCase() == userName.toUpperCase()) {
+    function validateUserName(formUserName) {
+        var mailFormat = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+        if (formUserName.match(mailFormat) && formUserName.toUpperCase() == userName.toUpperCase()) {
             return true;
         }
         else {
@@ -50,7 +50,7 @@ function check(form) {
     }
 
     //validate password
-    function ValidateFormpassword(formUserPassword) {
+    function validateFormPassword(formUserPassword) {
         if (formUserPassword == password) {
             return true;
         }

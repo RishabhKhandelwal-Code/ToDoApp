@@ -6,60 +6,51 @@ function formValidation() {
     var firstName = document.registration.firstName.value;
     var lastName = document.registration.lastName.value;
     var email = document.registration.email.value;
-    var tpassword = document.registration.password.value;
-    var cpassword = document.registration.cpassword.value;
+    var tPassword = document.registration.password.value;
+    var cPassword = document.registration.cPassword.value;
     var address = document.registration.address.value;
     var gender = document.registration.gender.value;
 
-    if (firstName == "" || lastName == "" || email == "" || tpassword == "" || cpassword == ""
+    if (firstName == "" || lastName == "" || email == "" || tPassword == "" || cPassword == ""
         || address == "" || gender == "") {
         alert("Please fill all details before submitting");
         return false;
     }
 
     //validation
-    if (validateFirstName(firstName)) {
-        if (validateLastName(lastName)) {
-            if (validatePassword(tpassword)) {
-                if (validateCPassword(cpassword, tpassword)) {
-                    if (validateAddress(address)) {
-                        if (validateGender(gender)) {
-                            //Array to store all the user inputs
-                            var userList = [];
+    if (validateFirstName(firstName) && validateLastName(lastName) && validatePassword(tPassword) &&
+        validatecPassword(cPassword, tPassword) && validateAddress(address) && validateGender(gender)) {
+        //Array to store all the user inputs
+        var userList = [];
 
-                            //Add data to userList array
-                            userList.push({
-                                firstName: firstName,
-                                lastName: lastName,
-                                email: email,
-                                password: cpassword,
-                                address: address,
-                                gender: gender
-                            });
+        //Add data to userList array
+        userList.push({
+            firstName: firstName,
+            lastName: lastName,
+            email: email,
+            password: cPassword,
+            address: address,
+            gender: gender
+        });
 
-                            //storing data to local storage
-                            var userListSerialized = JSON.stringify(userList);
-                            localStorage.setItem("userData", userListSerialized);
-                            alert("Registered Successfully");
-                            window.open('http://localhost:58162/Login/Login.html');
-                        }
-                    }
-                }
-            }
+        //storing data to local storage
+        var userListSerialized = JSON.stringify(userList);
+        localStorage.setItem("userData", userListSerialized);
+        alert("Registered Successfully");
+        window.open('../Login/Login.html');
+    }
+
+    //validate firstName
+    function validateFirstName(firstName) {
+        var letters = /^[A-Za-z]+$/;
+        if (firstName.match(letters)) {
+            return true;
         }
-    }
-}
-
-//validate firstName
-function validateFirstName(firstName) {
-    var letters = /^[A-Za-z]+$/;
-    if (firstName.match(letters)) {
-        return true;
-    }
-    else {
-        alert('FirstName must have alphabet characters only');
-        //firstName.focus(); -  //I removed it, as IE doesn't suport it.
-        return false;
+        else {
+            alert('FirstName must have alphabet characters only');
+            //firstName.focus(); -  //I removed it, as IE doesn't suport it.
+            return false;
+        }
     }
 }
 
@@ -77,8 +68,8 @@ function validateLastName(lastName) {
 }
 
 //validate Password
-function validatePassword(tpassword) {
-    var length = tpassword.length;
+function validatePassword(tPassword) {
+    var length = tPassword.length;
     if (length == 0 || length < 8) {
         alert("Password should not be empty and must be greater than 8");
         //password.focus();
@@ -88,11 +79,11 @@ function validatePassword(tpassword) {
 }
 
 //validate confirmed Password
-function validateCPassword(cpassword, tpassword) {
-    var length = cpassword.length;
-    if (length == 0 || length < 8 || tpassword != cpassword) {
+function validatecPassword(cPassword, tPassword) {
+    var length = cPassword.length;
+    if (length == 0 || length < 8 || tPassword != cPassword) {
         alert("Confirmed password is not matching with your password.");
-        //cpassword.focus();
+        //cPassword.focus();
         return false;
     }
     return true;
