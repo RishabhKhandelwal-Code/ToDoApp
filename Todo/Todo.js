@@ -4,7 +4,7 @@ It allows user to do all CRUD operations along with sorting and filtering of dat
 //Checks if the user is authenticated
 (function isUserAuthenticated() {
     if (sessionStorage.getItem('AuthenticationState') === null) {
-        window.open("AccessDenied.html", "_self");
+        window.open("../AccessDenied/AccessDenied.html", "_self");
     }
 })();
 

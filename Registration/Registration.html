@@ -7,6 +7,8 @@
 </head>
 <body>
     <link href="https://fonts.googleapis.com/css?family=Roboto&display=swap" rel="stylesheet">
+    <br />
+    <div id="error" class="inner-div"></div>
     <div class="wrapper">
         <form name='registration' class="myForm" onSubmit="event.preventDefault(); return formValidation();">
             <div class="formInstructionsDiv formElement">
@@ -19,7 +21,7 @@
                     <input class="inputRequest " id="lastName" type="text" placeholder="Last Name" />
                 </div>
                 <label>
-                    <input class="inputRequest formContentElement" id="email" type="email" placeholder="Email">
+                    <input class="inputRequest formContentElement" id="email" type="text" placeholder="Email">
                 </label>
                 <label>
                     <input class="inputRequest formContentElement" type="password" id="password" placeholder="Enter password">

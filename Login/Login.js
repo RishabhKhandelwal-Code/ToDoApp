@@ -2,10 +2,17 @@
 Login.js, authorizes a valid user to access the other application features 
 like Todo list, Profile and SignOut*/
 
+//Checks if the user is authenticated then it avoids redirecting him/her to Login Page
+(function isUserAuthenticated() {
+    if (sessionStorage.getItem('AuthenticationState') === "Authenticated") {
+        window.open("../Todo/Todo.html", "_self");
+    }
+})();
+
 //Check the user inputs
 function check(form) {
     if (form.userId.value == "" || form.pswrd.value == "") {
-        alert("Please fill all the details before submitting");
+        document.getElementById("error").innerHTML = "*Please fill all the details before submitting";
         return false;
     }
 
@@ -19,7 +26,7 @@ function check(form) {
     //validate localstorage for null or undefined
     if (userListDeserialized == undefined || userListDeserialized == null) {
         if (window.confirm('You don\'t have a register account. Please click OK to SignUp')) {
-            window.open("../Registration/Registration.html");
+            window.location.href = "../Registration/Registration.html";
         }
     }
 
@@ -31,11 +38,11 @@ function check(form) {
     if (validateUserName(formUserName) && validateFormPassword(formUserPassword)) {
         //Storing user information on successful login
         sessionStorage.setItem("AuthenticationState", "Authenticated");
-        alert("Logged In successfully");
         window.open("../Todo/Todo.html");
     }
     else {
-        alert("Invalid UserName or Password");
+        document.getElementById("error").innerHTML = "*Invalid UserName or Password";
+        document.getElementById("password").focus();
     }
 
     //validate userName

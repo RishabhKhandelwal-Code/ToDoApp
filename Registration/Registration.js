@@ -1,6 +1,13 @@
 ﻿/*Description -
 It validates and adds the user information to localStorage */
 
+//Checks if the user is authenticated then it avoids redirecting him/her to Registration Page
+(function isUserAuthenticated() {
+    if (sessionStorage.getItem('AuthenticationState') === "Authenticated") {
+        window.open("../Todo/Todo.html", "_self");
+    }
+})();
+
 //To validate form inputs
 function formValidation() {
     var firstName = document.registration.firstName.value;
@@ -13,12 +20,13 @@ function formValidation() {
 
     if (firstName == "" || lastName == "" || email == "" || tPassword == "" || cPassword == ""
         || address == "" || gender == "") {
-        alert("Please fill all details before submitting");
+        //alert("Please fill all details before submitting");
+        document.getElementById("error").innerHTML = "*Please fill all details before submitting";
         return false;
     }
 
     //validation
-    if (validateFirstName(firstName) && validateLastName(lastName) && validatePassword(tPassword) &&
+    if (validateFirstName(firstName) && validateLastName(lastName) && validateEmail(email) && validatePassword(tPassword) &&
         validatecPassword(cPassword, tPassword) && validateAddress(address) && validateGender(gender)) {
         //Array to store all the user inputs
         var userList = [];
@@ -36,7 +44,7 @@ function formValidation() {
         //storing data to local storage
         var userListSerialized = JSON.stringify(userList);
         localStorage.setItem("userData", userListSerialized);
-        alert("Registered Successfully");
+        //alert("Registered Successfully");
         window.open('../Login/Login.html');
     }
 
@@ -47,8 +55,8 @@ function formValidation() {
             return true;
         }
         else {
-            alert('FirstName must have alphabet characters only');
-            //firstName.focus(); -  //I removed it, as IE doesn't suport it.
+            document.getElementById("error").innerHTML = "*FirstName must have alphabet characters only";
+            document.getElementById("firstName").focus();
             return false;
         }
     }
@@ -61,8 +69,21 @@ function validateLastName(lastName) {
         return true;
     }
     else {
-        alert('LastName must have alphabet characters only');
-        //lastName.focus();
+        document.getElementById("error").innerHTML = "*LastName must have alphabet characters only";
+        document.getElementById("lastName").focus();
+        return false;
+    }
+}
+
+//validate Email
+function validateEmail(email) {
+    var mailFormat = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+    if (email.match(mailFormat)) {
+        return true;
+    }
+    else {
+        document.getElementById("error").innerHTML = "*Please enter a valid email Id";
+        document.getElementById("email").focus();
         return false;
     }
 }
@@ -71,8 +92,8 @@ function validateLastName(lastName) {
 function validatePassword(tPassword) {
     var length = tPassword.length;
     if (length == 0 || length < 8) {
-        alert("Password should not be empty and must be greater than 8");
-        //password.focus();
+        document.getElementById("error").innerHTML = "*Password should not be empty and must be greater than 8";
+        document.getElementById("password").focus();
         return false;
     }
     return true;
@@ -82,8 +103,8 @@ function validatePassword(tPassword) {
 function validatecPassword(cPassword, tPassword) {
     var length = cPassword.length;
     if (length == 0 || length < 8 || tPassword != cPassword) {
-        alert("Confirmed password is not matching with your password.");
-        //cPassword.focus();
+        document.getElementById("error").innerHTML = "*Confirmed password is not matching with your password";
+        document.getElementById("cPassword").focus();
         return false;
     }
     return true;
@@ -96,8 +117,8 @@ function validateAddress(address) {
         return true;
     }
     else {
-        alert('User address must have alphanumeric characters only');
-        //address.focus();
+        document.getElementById("error").innerHTML = "*User address must have alphanumeric characters only";
+        document.getElementById("address").focus();
         return false;
     }
 }
@@ -111,7 +132,8 @@ function validateGender(gender) {
         return true;
     }
     else {
-        alert('Value can only be Male or Female');
+        document.getElementById("error").innerHTML = "*Value can only be Male or Female";
+        document.getElementById("gender").focus();
         return false;
     }
 }

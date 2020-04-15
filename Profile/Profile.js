@@ -5,7 +5,7 @@ hence saves it to localStorage*/
 //Checks if the user is authenticated
 (function isUserAuthenticated() {
     if (sessionStorage.getItem('AuthenticationState') === null) {
-        window.open("AccessDenied.html", "_self");
+        window.open("../AccessDenied/AccessDenied.html", "_self");
     }
 })();
 

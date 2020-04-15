@@ -18,7 +18,7 @@ body {
 .myForm {
     /*   border:solid black; */
     background-color: white;
-    margin: 50px auto;
+    margin: 5px auto;
     display: flex;
     flex-direction: column;
     flex-wrap: wrap;
@@ -133,4 +133,29 @@ body {
     justify-content: space-between;
     /*   padding-bottom:40px; */
     margin-bottom: 20px;
+}
+
+.inner-div:empty{
+    display:none
+}
+.inner-div
+{
+    margin: 0 auto;
+    max-width: 410px;
+    height: auto;
+    background-color: #ccc;
+    border-radius: 3px;
+    text-align: center;
+    font-weight: 700;
+    width: 80%;
+    padding: 20px;
+    border: 1px solid #0d6380;
+    border-left-width: 7px;
+    border-radius: 3px;
+    margin: 10px auto;
+    font-family: 'Open Sans', sans-serif;
+    font-size: 16px;
+    border-left-color: #d9534f;
+    background-color: #f2f2f2;
+    color: #f80f09;
 }
