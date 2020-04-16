@@ -2,7 +2,7 @@
 It validates and adds the user information to localStorage */
 
 //Checks if the user is authenticated then it avoids redirecting him/her to Registration Page
-(function isUserAuthenticated() {
+(function () {
     if (sessionStorage.getItem('AuthenticationState') === "Authenticated") {
         window.open("../Todo/Todo.html", "_self");
     }
@@ -10,55 +10,60 @@ It validates and adds the user information to localStorage */
 
 //To validate form inputs
 function formValidation() {
-    var firstName = document.registration.firstName.value;
-    var lastName = document.registration.lastName.value;
-    var email = document.registration.email.value;
-    var tPassword = document.registration.password.value;
-    var cPassword = document.registration.cPassword.value;
-    var address = document.registration.address.value;
-    var gender = document.registration.gender.value;
+    //Imediately Invoked Function Expression (IIFE)
+    (function () {
+        //To execute javascript code in "strict mode".
+        'use strict';
+        var firstName = document.registration.firstName.value;
+        var lastName = document.registration.lastName.value;
+        var email = document.registration.email.value;
+        var tPassword = document.registration.password.value;
+        var cPassword = document.registration.cPassword.value;
+        var address = document.registration.address.value;
+        var gender = document.registration.gender.value;
 
-    if (firstName == "" || lastName == "" || email == "" || tPassword == "" || cPassword == ""
-        || address == "" || gender == "") {
-        //alert("Please fill all details before submitting");
-        document.getElementById("error").innerHTML = "*Please fill all details before submitting";
-        return false;
-    }
-
-    //validation
-    if (validateFirstName(firstName) && validateLastName(lastName) && validateEmail(email) && validatePassword(tPassword) &&
-        validatecPassword(cPassword, tPassword) && validateAddress(address) && validateGender(gender)) {
-        //Array to store all the user inputs
-        var userList = [];
-
-        //Add data to userList array
-        userList.push({
-            firstName: firstName,
-            lastName: lastName,
-            email: email,
-            password: cPassword,
-            address: address,
-            gender: gender
-        });
-
-        //storing data to local storage
-        var userListSerialized = JSON.stringify(userList);
-        localStorage.setItem("userData", userListSerialized);
-        //alert("Registered Successfully");
-        window.open('../Login/Login.html');
-    }
-
-    //validate firstName
-    function validateFirstName(firstName) {
-        var letters = /^[A-Za-z]+$/;
-        if (firstName.match(letters)) {
-            return true;
-        }
-        else {
-            document.getElementById("error").innerHTML = "*FirstName must have alphabet characters only";
-            document.getElementById("firstName").focus();
+        if (firstName == "" || lastName == "" || email == "" || tPassword == "" || cPassword == ""
+            || address == "" || gender == "") {
+            //alert("Please fill all details before submitting");
+            document.getElementById("error").innerHTML = "*Please fill all details before submitting";
             return false;
         }
+
+        //validation
+        if (validateFirstName(firstName) && validateLastName(lastName) && validateEmail(email) && validatePassword(tPassword) &&
+            validatecPassword(cPassword, tPassword) && validateAddress(address) && validateGender(gender)) {
+            //Array to store all the user inputs
+            var userList = [];
+
+            //Add data to userList array
+            userList.push({
+                firstName: firstName,
+                lastName: lastName,
+                email: email,
+                password: cPassword,
+                address: address,
+                gender: gender
+            });
+
+            //storing data to local storage
+            var userListSerialized = JSON.stringify(userList);
+            localStorage.setItem("userData", userListSerialized);
+            //alert("Registered Successfully");
+            window.open('../Login/Login.html');
+        }
+    })();
+}
+
+//validate firstName
+function validateFirstName(firstName) {
+    var letters = /^[A-Za-z]+$/;
+    if (firstName.match(letters)) {
+        return true;
+    }
+    else {
+        document.getElementById("error").innerHTML = "*FirstName must have alphabet characters only";
+        document.getElementById("firstName").focus();
+        return false;
     }
 }
 
@@ -137,4 +142,3 @@ function validateGender(gender) {
         return false;
     }
 }
-

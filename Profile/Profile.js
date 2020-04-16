@@ -2,8 +2,11 @@
 It allows user to update their information and
 hence saves it to localStorage*/
 
+//To execute javascript code in "strict mode".
+'use strict';
+
 //Checks if the user is authenticated
-(function isUserAuthenticated() {
+(function() {
     if (sessionStorage.getItem('AuthenticationState') === null) {
         window.open("../AccessDenied/AccessDenied.html", "_self");
     }
@@ -14,7 +17,7 @@ var userListDeserialized = JSON.parse(localStorage.getItem("userData"));
 //Note - userListDeserialized is been validated already in login.js
 
 //Bind data to html
-(function bindData() {
+(function() {
     var firstName = userListDeserialized[0].firstName;
     var lastName = userListDeserialized[0].lastName;
     var email = userListDeserialized[0].email;
@@ -30,21 +33,23 @@ var userListDeserialized = JSON.parse(localStorage.getItem("userData"));
 
 //To update form data
 function formUpdation() {
-    //Get form data
-    var uFirstName = document.profile.firstName.value;
-    var uLastName = document.profile.lastName.value;
-    var uEmail = document.profile.email.value;
-    var uAddress = document.profile.address.value;
-    var uPassword = document.profile.password.value;
+    (function(){
+        //Get form data
+        var uFirstName = document.profile.firstName.value;
+        var uLastName = document.profile.lastName.value;
+        var uEmail = document.profile.email.value;
+        var uAddress = document.profile.address.value;
+        var uPassword = document.profile.password.value;
 
-    //Update it to local storage
-    userListDeserialized[0].firstName = uFirstName;
-    userListDeserialized[0].lastName = uLastName;
-    userListDeserialized[0].email = uEmail;
-    userListDeserialized[0].address = uAddress;
-    userListDeserialized[0].password = uPassword;
+        //Update it to local storage
+        userListDeserialized[0].firstName = uFirstName;
+        userListDeserialized[0].lastName = uLastName;
+        userListDeserialized[0].email = uEmail;
+        userListDeserialized[0].address = uAddress;
+        userListDeserialized[0].password = uPassword;
 
-    var userListSerialized = JSON.stringify(userListDeserialized);
-    localStorage.setItem("userData", userListSerialized);
-    alert("Data updated successfuly");
+        var userListSerialized = JSON.stringify(userListDeserialized);
+        localStorage.setItem("userData", userListSerialized);
+        alert("Data updated successfuly");
+    })();
 }

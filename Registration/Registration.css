@@ -135,11 +135,11 @@ body {
     margin-bottom: 20px;
 }
 
-.inner-div:empty{
-    display:none
+.inner-div:empty {
+    display: none;
 }
-.inner-div
-{
+
+.inner-div {
     margin: 0 auto;
     max-width: 410px;
     height: auto;

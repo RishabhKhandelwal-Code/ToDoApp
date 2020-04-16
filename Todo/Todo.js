@@ -1,8 +1,11 @@
 ﻿/*Description -
 It allows user to do all CRUD operations along with sorting and filtering of data*/
 
+//To execute javascript code in "strict mode".
+'use strict';
+
 //Checks if the user is authenticated
-(function isUserAuthenticated() {
+(function(){
     if (sessionStorage.getItem('AuthenticationState') === null) {
         window.open("../AccessDenied/AccessDenied.html", "_self");
     }
@@ -12,17 +15,20 @@ var selectedRow = null
 
 //On Form Submittion
 function onFormSubmit() {
-    var formData = readFormData();
-    if (selectedRow == null) {
-        insertNewRecord(formData);
-    }
-    else {
-        updateRecord(formData);
-    }
-    resetForm();
-    //storing data in localStorage
-    var formDataSerialized = JSON.stringify(formData);
-    localStorage.setItem("formData", formDataSerialized);
+    //IIFE
+    (function(){
+        var formData = readFormData();
+        if (selectedRow == null) {
+            insertNewRecord(formData);
+        }
+        else {
+            updateRecord(formData);
+        }
+        resetForm();
+        //storing data in localStorage
+        var formDataSerialized = JSON.stringify(formData);
+        localStorage.setItem("formData", formDataSerialized);
+    })();
 }
 
 //Loads already existing data from localStorage, if any
@@ -47,15 +53,15 @@ function readFormData() {
 function insertNewRecord(data) {
     var table = document.getElementById("myTable").getElementsByTagName('tbody')[0];
     var newRow = table.insertRow(table.length);
-    cell1 = newRow.insertCell(0);
+    var cell1 = newRow.insertCell(0);
     cell1.innerHTML = data.date;
-    cell2 = newRow.insertCell(1);
+    var cell2 = newRow.insertCell(1);
     cell2.innerHTML = data.title;
-    cell3 = newRow.insertCell(2);
+    var cell3 = newRow.insertCell(2);
     cell3.innerHTML = data.comment;
-    cell4 = newRow.insertCell(3);
+    var cell4 = newRow.insertCell(3);
     cell4.innerHTML = data.categories;
-    cell4 = newRow.insertCell(4);
+    var cell4 = newRow.insertCell(4);
     cell4.innerHTML = `<a onClick="onEdit(this)">Edit</a>
                        <a onClick="onDelete(this)">Delete</a>`;
 }
@@ -138,7 +144,7 @@ function updateRecord(formData) {
 //Deletes the selected row of a table
 function onDelete(td) {
     if (confirm('Are you sure to delete this record ?')) {
-        row = td.parentElement.parentElement;
+        var row = td.parentElement.parentElement;
         document.getElementById("myTable").deleteRow(row.rowIndex);
         localStorage.removeItem("formData");
         resetForm();
